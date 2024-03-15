@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Move Square with Arrow Keys</title>
+</head>
+<body>
+    <h1>My JavaScript Game!</h1>
+    <canvas id="canvas" width="1400" height="800"></canvas>
+
+    <!-- 
+        Scripting for class and function definitions below
+    -->
+    <script>
+        class Square {
+            // Constructor Taking in:
+            // x,y position
+            // size
+            // speed
+            // ctx <- This is the canvas context
+            constructor(x, y, size, speed, ctx) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.speed = speed;
+                this.ctx = ctx;
+            }
+
+            draw() {
+                this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+
+                //
+                this.ctx.fillStyle = 'blue';
+                this.ctx.fillRect(this.x, this.y, this.size, this.size);
+            }
+
+            move(dx, dy) {
+                this.dx = dx * this.speed;
+                this.dy = dy * this.speed;
+            }
+
+            update() {
+                this.x = this.x + this.dx;
+                this.y = this.y + this.dy;
+            }
+        }
+
+        // Store the Canvas for our drawing in the variable ctx
+        // Considering these elements do not change assignment
+        // Good practices dictates we should use a const -> constant
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Initialize the square variable using new ClassName
+        // and send in the arguments for the square position (x,y),
+        // the square size (50), the square speed (5), and the 
+        // canvas constant variable (ctx)
+        const square = new Square(0, 0, 50, 5, ctx);
+        
+        square.draw();
+
+        square.move(10,10);
+        square.update();
+        square.draw();
+
+    </script>
+</body>
+</html>
